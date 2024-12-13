@@ -53,7 +53,7 @@ Replace `your_mongodb_connection_string` with the connection string you copied f
 ### Step 6: Run the application
 
 ```bash
-flask --app app run --host=0.0.0.0 --port 8080 
+flask --app app run --host=0.0.0.0 --port 8080
 ```
 
 Your Flask application should now be running and connected to MongoDB.
