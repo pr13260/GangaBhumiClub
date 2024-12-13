@@ -1,6 +1,7 @@
-# GangaBhumiClub
+# Ganga Bhumi Club
 
-A login page made for Task round of **GangaBhumiClub**
+A login page made for Task round of **Ganga Bhumi Club**
+[Live demo can be Found here](https://ganga-bhumi-club.vercel.app/)
 
 ## Installation
 
