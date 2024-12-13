@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Sign-Up Page</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://db.onlinewebfonts.com/c/86a7531fd64f8c265aad90eeca343917?family=TypeO" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+        }
+
+        .container {
+            width: 600px;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            transform: scale(1);
+            opacity: 1;
+            box-sizing: border-box;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hidden {
+            transform: scale(0.9) translate(-50%, -50%);
+            opacity: 0;
+            display: none;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #dd9b0d;  
+            font-family: "Kalam", cursive;
+            font-weight: 900;
+            font-style: normal;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color:#00f2fe;
+            font-weight: 900;
+            font-style: normal;
+            font-family: "TypeO";
+            font-size: xx-large;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: #4facfe;
+            outline: none;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #4facfe;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #3c8dff;
+        }
+
+        .switch-link {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .switch-link a {
+            color: #4facfe;
+            text-decoration: none;
+        }
+
+        .switch-link a:hover {
+            text-decoration: underline;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .button-row button {
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+        }
+
+        .fade-in {
+            animation: fade-in 0.5s ease-in-out;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container hidden" id="signUpContainer">
+        <h1> Join The Ganga Bhumi Club</h1>
+        <h2>Sign-Up</h2>
+        <form id="signUpForm" action="/register" method="POST" onsubmit="handleSignUp(event)">
+            <div class="form-group">
+                <label for="email">Email/Mobile Number</label>
+                <input type="text" id="email" name="email" required>
+                <p class="error-message" id="emailError"></p>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <p class="error-message" id="passwordError"></p>
+            </div>
+            <button type="submit">Sign Up</button>
+        </form>
+        <div class="switch-link">
+            <p><button type="button" href="#" onclick="switchToLogin()">Already a member ? Login here </button></a></p>
+        </div>
+    </div>
+
+    <div class="container" id="loginContainer">
+        <h1> Join The Ganga Bhumi Club</h1>
+        <h2>Login</h2>
+        <form id="loginForm" action="/login" method="POST" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="loginEmail">Email/Mobile Number</label>
+                <input type="text" id="loginEmail" name="loginEmail" required>
+                <p class="error-message" id="loginEmailError"></p>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" name="loginPassword" required>
+                <p class="error-message" id="loginPasswordError"></p>
+            </div>
+            <div class="button">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+        <div class="switch-link">
+            <div class="button-row">
+            <p><button type="button" href="#" onclick="switchToSignUp()">Don't have an account? <br>Sign Up here</button></a></p>
+            <p><button type="button" href="#" onclick="switchToSignUp()">Forgot Password</button></a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const signUpContainer = document.getElementById('signUpContainer');
+        const loginContainer = document.getElementById('loginContainer');
+
+        window.onload = () => {
+            loginContainer.style.display = 'none';
+        };
+
+        function switchToLogin() {
+            signUpContainer.classList.add('hidden');
+            setTimeout(() => {
+                signUpContainer.style.display = 'none';
+                loginContainer.style.display = 'block';
+                setTimeout(() => loginContainer.classList.remove('hidden'), 10);
+            }, 500);
+        }
+
+        function switchToSignUp() {
+            loginContainer.classList.add('hidden');
+            setTimeout(() => {
+                loginContainer.style.display = 'none';
+                signUpContainer.style.display = 'block';
+                setTimeout(() => signUpContainer.classList.remove('hidden'), 10);
+            }, 500);
+        }
+        function handleSignUp(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            emailError.textContent = '';
+            passwordError.textContent = '';
+            if (!validateEmail(email) && !validatePhone(email)) {
+                emailError.textContent = 'Invalid email or mobile number format';
+                return;
+            }
+            if (password.length < 6) {
+                passwordError.textContent = 'Password must be at least 6 characters';
+                return;
+            }
+            document.getElementById('signUpForm').submit();
+        }
+        function handleLogin(event) {
+            event.preventDefault();
+            const loginEmail = document.getElementById('loginEmail').value.trim();
+            const loginPassword = document.getElementById('loginPassword').value;
+            const loginEmailError = document.getElementById('loginEmailError');
+            const loginPasswordError = document.getElementById('loginPasswordError');
+            loginEmailError.textContent = '';
+            loginPasswordError.textContent = '';
+            if (!validateEmail(loginEmail) && !validatePhone(loginEmail)) {
+                loginEmailError.textContent = 'Invalid email or mobile number format';
+                return;
+            }
+            if (loginPassword.length < 6) {
+                loginPasswordError.textContent = 'Incorrect password';
+                return;
+            }
+            document.getElementById('loginForm').submit();
+        }
+
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        function validatePhone(phone) {
+            const phoneRegex = /^\d{10}$/;
+            return phoneRegex.test(phone);
+        }
+    </script>
+</body>
+</html>
